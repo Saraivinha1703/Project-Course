@@ -9,11 +9,14 @@ namespace ProjectCourse.Data
 {
     public class ProjectCourseContext : DbContext
     {
-        public ProjectCourseContext (DbContextOptions<ProjectCourseContext> options)
-            : base(options)
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Seller> Seller { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
+
+
+
+        public ProjectCourseContext (DbContextOptions<ProjectCourseContext> options) : base(options)
         {
         }
-
-        public DbSet<ProjectCourse.Models.Department> Department { get; set; }
     }
 }
