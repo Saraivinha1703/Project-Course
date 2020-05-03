@@ -37,7 +37,7 @@ namespace ProjectCourse
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<ProjectCourseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ProjectCourseContext")));
+                    options.UseMySql(Configuration.GetConnectionString("ProjectCourseContext"), builder => builder.MigrationsAssembly("ProjectCourse")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
