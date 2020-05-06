@@ -1,0 +1,34 @@
+﻿@model ProjectCourse.Models.Seller
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+<h4>Seller</h4>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label">Birth Date</label>
+                <input asp-for="BirthDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseSalary" class="control-label">Base Salary</label>
+                <input asp-for="BaseSalary" type="number" class="form-control" placeholder="Salary" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
