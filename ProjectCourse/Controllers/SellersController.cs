@@ -37,6 +37,12 @@ namespace ProjectCourse.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                ICollection<Department> departments = _departmentService.FindAll();
+                SellerFormViewModel viewModel = new SellerFormViewModel { Departments = departments, Seller = seller };
+                return View(viewModel);
+            }
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -101,7 +107,13 @@ namespace ProjectCourse.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
-            if(id != seller.Id)
+            if (!ModelState.IsValid)
+            {
+                ICollection<Department> departments = _departmentService.FindAll();
+                SellerFormViewModel viewModel = new SellerFormViewModel { Departments = departments, Seller = seller };
+                return View(viewModel);
+            }
+            if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Ids mismatched" });
             }
