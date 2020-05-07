@@ -1,8 +1,9 @@
 ﻿using ProjectCourse.Data;
 using ProjectCourse.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using ProjectCourse.Services.Exceptions;
 
 namespace ProjectCourse.Services
 {
@@ -20,7 +21,7 @@ namespace ProjectCourse.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(x => x.Id == id);
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(x => x.Id == id);
         }
 
         public void Insert(Seller seller)
@@ -34,5 +35,23 @@ namespace ProjectCourse.Services
             _context.Seller.Remove(obj);
             _context.SaveChanges();
         }
+
+        public void Update(Seller obj)
+        {
+            if (!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+
+            }catch(DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+        }
+
     }
 }
